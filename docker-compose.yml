@@ -17,14 +17,16 @@ services:
       - /tmp
       - /run/lock
     ports:
-      - 8080:80
+      - 58080:80
     depends_on:
       - bugzilla5.db
+    networks:
+      - network
     environment: &bugzilla_env
-      - BZ_ADMIN_EMAIL=admin@bugzilla.test
+      - BZ_ADMIN_EMAIL=bugzilla@qsci.in
       - BZ_ADMIN_PASSWORD=password01!
       - BZ_ADMIN_REALNAME=Test Admin
-      - BZ_URLBASE=http://127.0.0.1:8080/
+      - BZ_URLBASE=http://bugzilla.qsci.in:58080/
       - BZ_DB_HOST=bugzilla5.db
       - BZ_DB_PORT=3306
       - BZ_DB_USER=bugs
@@ -43,6 +45,15 @@ services:
       - /tmp
       - /var/lock
     environment: *bugzilla_env
+    networks:
+      - network
+
+networks:
+  network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.112.160/29
 
 volumes:
   bugzilla5-mysql-db:
