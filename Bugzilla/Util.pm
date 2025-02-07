@@ -32,6 +32,7 @@ use Bugzilla::Error;
 
 use Date::Parse;
 use Date::Format;
+BEGIN { $ENV{TZ} = 'Asia/Kolkata' }
 use Digest;
 use Email::Address::XS;
 use List::Util qw(first);
