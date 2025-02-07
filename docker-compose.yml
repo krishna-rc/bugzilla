@@ -22,6 +22,7 @@ services:
       - bugzilla5.db
     networks:
       - network
+    restart: unless-stopped
     environment: &bugzilla_env
       - BZ_ADMIN_EMAIL=bugzilla@qsci.in
       - BZ_ADMIN_PASSWORD=password01!
@@ -44,6 +45,7 @@ services:
     tmpfs:
       - /tmp
       - /var/lock
+    restart: unless-stopped
     environment: *bugzilla_env
     networks:
       - network
